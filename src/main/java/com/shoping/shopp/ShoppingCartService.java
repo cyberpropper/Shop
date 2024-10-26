@@ -12,6 +12,12 @@ public class ShoppingCartService {
         cartThreadLocal.get().addItem(itemId);
     }
 
+    public void addItems(List<Integer> itemIds) {
+        for (int itemId : itemIds) {
+            cartThreadLocal.get().addItem(itemId);
+        }
+    }
+
     public List<Integer> getItems() {
         return cartThreadLocal.get().getItems();
     }

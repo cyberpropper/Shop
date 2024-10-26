@@ -12,9 +12,14 @@ public class ShoppingCartController {
     @Autowired
     private ShoppingCartService shoppingCartService;
 
-    @PostMapping("/add")
+    @GetMapping("/add")
     public void addItem(@RequestParam int itemId) {
         shoppingCartService.addItem(itemId);
+    }
+
+    @PostMapping("/add-list")
+    public void addItems(@RequestBody List<Integer> itemIds) {
+        shoppingCartService.addItems(itemIds);
     }
 
     @GetMapping("/get")
