@@ -1,24 +1,27 @@
 package com.shoping.shopp;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class ShoppingCartService {
-    private final ThreadLocal<ShoppingCart> cartThreadLocal = ThreadLocal.withInitial(ShoppingCart::new);
+    private final ShoppingCart cart = new ShoppingCart();
 
     public void addItem(int itemId) {
-        cartThreadLocal.get().addItem(itemId);
+        cart.addItem(itemId);
     }
 
     public void addItems(List<Integer> itemIds) {
         for (int itemId : itemIds) {
-            cartThreadLocal.get().addItem(itemId);
+            cart.addItem(itemId);
         }
     }
 
     public List<Integer> getItems() {
-        return cartThreadLocal.get().getItems();
+        return cart.getItems();
     }
 }

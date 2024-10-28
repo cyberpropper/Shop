@@ -12,6 +12,10 @@ public class ShoppingCartController {
     @Autowired
     private ShoppingCartService shoppingCartService;
 
+    public ShoppingCartController(ShoppingCartService shoppingCartService) {
+        this.shoppingCartService = shoppingCartService;
+    }
+
     @GetMapping("/add")
     public void addItem(@RequestParam int itemId) {
         shoppingCartService.addItem(itemId);
